@@ -1,4 +1,4 @@
-# LibrarySpringProject
+# LibraryProject
 A simple microservices architecture to manage a library.
 There are 3 main services:
 1. Catalog Service: anyone can view all books in the library's catalog and their state
