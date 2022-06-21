@@ -21,8 +21,8 @@ public class CatalogService {
 		return catalogRepository.findAll();
 	}
 
-	public Book find(String id) {
-		return catalogRepository.findById(id).orElseThrow();
+	public Book find(String isbn) {
+		return catalogRepository.findById(isbn).orElseThrow();
 	}
 
 	public List<Book> findAllBy(Genre genre, String author) {
@@ -38,6 +38,10 @@ public class CatalogService {
 			ret = catalogRepository.findAllByAuthor(author);
 
 		return ret;
+	}
+
+	public Boolean isInLibrary(String isbn) {
+		return catalogRepository.findById(isbn).isPresent();
 	}
 
 	private boolean isNullOrBlank(String testo) {

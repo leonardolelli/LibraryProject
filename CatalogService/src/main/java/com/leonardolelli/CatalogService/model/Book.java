@@ -7,31 +7,29 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class Book {
 
 	@Id
-	private String id;
+	private String isbn;
 	private String title;
 	private String author;
 	private Integer year;
 	private Genre genre;
-	private boolean available;
 
 	public Book() {
 	}
 
-	public Book(String id, String title, String author, Integer year, Genre genre, boolean available) {
-		this.id = id;
+	public Book(String isbn, String title, String author, Integer year, Genre genre) {
+		this.isbn = isbn;
 		this.title = title;
 		this.author = author;
 		this.year = year;
 		this.genre = genre;
-		this.available = available;
 	}
 
-	public String getId() {
-		return id;
+	public String getIsbn() {
+		return isbn;
 	}
 
-	public void setId(String id) {
-		this.id = id;
+	public void setIsbn(String id) {
+		this.isbn = id;
 	}
 
 	public String getTitle() {
@@ -64,14 +62,6 @@ public class Book {
 
 	public void setGenre(Genre genre) {
 		this.genre = genre;
-	}
-
-	public boolean isAvailable() {
-		return available;
-	}
-
-	public void setDisponibile(boolean available) {
-		this.available = available;
 	}
 
 	public enum Genre {

@@ -3,6 +3,7 @@ package com.leonardolelli.CatalogService.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,7 @@ import com.leonardolelli.CatalogService.service.CatalogService;
 
 @RestController
 @RequestMapping("/api/catalog")
+@CrossOrigin
 public class CatalogController {
 
 	@Autowired
@@ -26,9 +28,14 @@ public class CatalogController {
 		return catalogService.findAll();
 	}
 
-	@GetMapping("/{id}")
-	public Book details(@PathVariable(name = "id", required = true) String id) {
-		return catalogService.find(id);
+	@GetMapping("/{isbn}")
+	public Book details(@PathVariable(name = "isbn", required = true) String isbn) {
+		return catalogService.find(isbn);
+	}
+
+	@GetMapping("/isInLibrary/{isbn}")
+	public Boolean isInLibrary(@PathVariable(name = "isbn", required = true) String isbn) {
+		return catalogService.isInLibrary(isbn);
 	}
 
 	@GetMapping("/findAllBy")

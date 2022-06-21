@@ -29,8 +29,8 @@ class CatalogServiceTest {
 	void testFindAll() {
 		String id1 = UUID.randomUUID().toString();
 		String id2 = UUID.randomUUID().toString();
-		List<Book> bookList = List.of(new Book(id1, "titolo1", "autore1", 1990, Genre.horror, true),
-				new Book(id2, "titolo2", "autore2", 2000, Genre.thriller, false));
+		List<Book> bookList = List.of(new Book(id1, "titolo1", "autore1", 1990, Genre.horror),
+				new Book(id2, "titolo2", "autore2", 2000, Genre.thriller));
 
 		Mockito.when(catalogRepository.findAll()).thenReturn(bookList);
 		List<Book> result = catalogService.findAll();
@@ -40,7 +40,7 @@ class CatalogServiceTest {
 	@Test
 	void testFind() {
 		String id1 = UUID.randomUUID().toString();
-		Book testBook = new Book(id1, "titolo1", "autore1", 1990, Genre.horror, true);
+		Book testBook = new Book(id1, "titolo1", "autore1", 1990, Genre.horror);
 
 		Mockito.when(catalogRepository.findById(id1)).thenReturn(Optional.of(testBook));
 		Book result = catalogService.find(id1);
@@ -51,8 +51,8 @@ class CatalogServiceTest {
 	void testFindAllByGenre() {
 		String id1 = UUID.randomUUID().toString();
 		String id2 = UUID.randomUUID().toString();
-		List<Book> bookList = List.of(new Book(id1, "titolo1", "autore1", 1990, Genre.horror, true),
-				new Book(id2, "titolo2", "autore2", 2000, Genre.horror, false));
+		List<Book> bookList = List.of(new Book(id1, "titolo1", "autore1", 1990, Genre.horror),
+				new Book(id2, "titolo2", "autore2", 2000, Genre.horror));
 
 		Mockito.when(catalogRepository.findAllByGenre(Genre.horror)).thenReturn(bookList);
 		List<Book> result = catalogService.findAllBy(Genre.horror, null);
@@ -63,8 +63,8 @@ class CatalogServiceTest {
 	void testFindAllByAuthor() {
 		String id1 = UUID.randomUUID().toString();
 		String id2 = UUID.randomUUID().toString();
-		List<Book> bookList = List.of(new Book(id1, "titolo1", "autore2", 1990, Genre.horror, true),
-				new Book(id2, "titolo2", "autore2", 2000, Genre.horror, false));
+		List<Book> bookList = List.of(new Book(id1, "titolo1", "autore2", 1990, Genre.horror),
+				new Book(id2, "titolo2", "autore2", 2000, Genre.horror));
 
 		Mockito.when(catalogRepository.findAllByAuthor("autore2")).thenReturn(bookList);
 		List<Book> result = catalogService.findAllBy(null, "autore2");
@@ -75,8 +75,8 @@ class CatalogServiceTest {
 	void testFindAllByGenreAndAthor() {
 		String id1 = UUID.randomUUID().toString();
 		String id2 = UUID.randomUUID().toString();
-		List<Book> bookList = List.of(new Book(id1, "titolo1", "autore2", 1990, Genre.horror, true),
-				new Book(id2, "titolo2", "autore2", 2000, Genre.horror, false));
+		List<Book> bookList = List.of(new Book(id1, "titolo1", "autore2", 1990, Genre.horror),
+				new Book(id2, "titolo2", "autore2", 2000, Genre.horror));
 
 		Mockito.when(catalogRepository.findAllByGenreAndAuthor(Genre.horror, "autore2")).thenReturn(bookList);
 		List<Book> result = catalogService.findAllBy(Genre.horror, "autore2");
