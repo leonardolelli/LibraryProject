@@ -13,7 +13,7 @@ import com.leonardolelli.RentalService.exception.BookAlreadyReturnedException;
 import com.leonardolelli.RentalService.exception.BookNotAvailableException;
 
 @RestControllerAdvice
-public class RentControllerAdvice {
+public class ControllerAdvice {
 
     @ExceptionHandler(SQLTransientConnectionException.class)
     @ResponseStatus(value = HttpStatus.SERVICE_UNAVAILABLE, reason = "DB service not available")

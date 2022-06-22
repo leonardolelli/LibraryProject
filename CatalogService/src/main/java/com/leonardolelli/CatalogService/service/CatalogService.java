@@ -21,7 +21,7 @@ public class CatalogService {
 		return catalogRepository.findAll();
 	}
 
-	public Book find(String isbn) {
+	public Book findById(String isbn) {
 		return catalogRepository.findById(isbn).orElseThrow();
 	}
 

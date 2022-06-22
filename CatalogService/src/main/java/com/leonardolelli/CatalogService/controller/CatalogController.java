@@ -30,7 +30,7 @@ public class CatalogController {
 
 	@GetMapping("/{isbn}")
 	public Book details(@PathVariable(name = "isbn", required = true) String isbn) {
-		return catalogService.find(isbn);
+		return catalogService.findById(isbn);
 	}
 
 	@GetMapping("/isInLibrary/{isbn}")

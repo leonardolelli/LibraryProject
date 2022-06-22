@@ -41,8 +41,17 @@ public class Rent {
     private User user;
 
     public Rent() {
-	fromDate = LocalDate.now();
-	returnDate = null;
+	this.fromDate = LocalDate.now();
+	this.returnDate = null;
+    }
+
+    public Rent(Integer id, String isbn, LocalDate toDate, User user) {
+	this.id = id;
+	this.isbn = isbn;
+	this.toDate = toDate;
+	this.user = user;
+	this.fromDate = LocalDate.now();
+	this.returnDate = null;
     }
 
     public Integer getId() {
@@ -91,6 +100,12 @@ public class Rent {
 
     public void setUser(User user) {
 	this.user = user;
+    }
+
+    @Override
+    public String toString() {
+	return String.format("%s %s", this.isbn, this.returnDate.toString());
+
     }
 
 }

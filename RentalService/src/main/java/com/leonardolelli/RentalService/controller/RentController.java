@@ -1,5 +1,7 @@
 package com.leonardolelli.RentalService.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -32,12 +34,22 @@ public class RentController {
 
     @PostMapping
     public Rent rentABook(@RequestBody Rent rent) {
-	return rentService.insert(rent);
+	return rentService.rentABook(rent);
     }
 
     @PutMapping("/{isbn}")
     public Rent returnABook(@PathVariable(name = "isbn", required = true) String isbn) {
 	return rentService.returnABook(isbn);
+    }
+
+    @GetMapping("/pending_rents/{username}")
+    public List<Rent> getPendingRentsForUser(@PathVariable(name = "username", required = true) String username) {
+	return rentService.findAllPendingRentsFor(username);
+    }
+
+    @GetMapping("/completed_rents/{username}")
+    public List<Rent> getCompletedRentsForUser(@PathVariable(name = "username", required = true) String username) {
+	return rentService.findAllCompletedRentsFor(username);
     }
 
 }

@@ -1,7 +1,7 @@
 package com.leonardolelli.RentalService.service;
 
 import java.time.LocalDate;
-import java.util.NoSuchElementException;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,19 +24,15 @@ public class RentService {
     public static final String CATALOG_SERVICE_URL = "http://localhost:8083";
     public static final String IS_IN_LIBRARY = "/api/catalog/isInLibrary";
 
-    public Rent insert(Rent rent) {
-	// check if the isbn is of a book in the library
-	if (!restTemplate.getForObject(String.format("%s%s/%s", CATALOG_SERVICE_URL, IS_IN_LIBRARY, rent.getIsbn()),
-		Boolean.class))
-	    throw new NoSuchElementException("Book not in catalog");
-
+    public Rent rentABook(Rent rent) {
 	if (!isAvailable(rent.getIsbn()))
 	    throw new BookNotAvailableException();
 	return rentRepository.save(rent);
     }
 
     public boolean isAvailable(String isbn) {
-	return rentRepository.findFirstByIsbnAndReturnDateIsNull(isbn).isEmpty();
+	return restTemplate.getForObject(String.format("%s%s/%s", CATALOG_SERVICE_URL, IS_IN_LIBRARY, isbn),
+		Boolean.class) && rentRepository.findFirstByIsbnAndReturnDateIsNull(isbn).isEmpty();
 
     }
 
@@ -51,5 +47,13 @@ public class RentService {
 
     public Rent findById(Integer id) {
 	return rentRepository.findById(id).orElseThrow();
+    }
+
+    public List<Rent> findAllPendingRentsFor(String username) {
+	return rentRepository.findByUserAndReturnDateIsNull(username);
+    }
+
+    public List<Rent> findAllCompletedRentsFor(String username) {
+	return rentRepository.findByUserAndReturnDateIsNotNull(username);
     }
 }

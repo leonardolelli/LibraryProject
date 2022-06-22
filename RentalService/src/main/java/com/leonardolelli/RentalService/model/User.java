@@ -27,6 +27,13 @@ public class User {
 	this.username = username;
     }
 
+    public User(String username, String name, String surname, LocalDate dateOfBirth) {
+	this.username = username;
+	this.name = name;
+	this.surname = surname;
+	this.dateOfBirth = dateOfBirth;
+    }
+
     public String getUsername() {
 	return username;
     }
