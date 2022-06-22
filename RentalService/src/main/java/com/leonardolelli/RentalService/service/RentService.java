@@ -8,7 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.leonardolelli.RentalService.exception.BookAlreadyReturnedException;
+import com.leonardolelli.RentalService.exception.BookNotRentedException;
 import com.leonardolelli.RentalService.exception.BookNotAvailableException;
 import com.leonardolelli.RentalService.model.Rent;
 import com.leonardolelli.RentalService.repository.RentRepository;
@@ -39,7 +39,7 @@ public class RentService {
     public Rent returnABook(String isbn) {
 	Optional<Rent> r = rentRepository.findFirstByIsbnAndReturnDateIsNull(isbn);
 	if (r.isEmpty())
-	    throw new BookAlreadyReturnedException();
+	    throw new BookNotRentedException();
 	Rent res = r.get();
 	res.setReturnDate(LocalDate.now());
 	return rentRepository.save(res);

@@ -2,6 +2,7 @@ package com.leonardolelli.RentalService.service;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.ArgumentMatchers.eq;
@@ -18,6 +19,8 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.client.RestTemplate;
 
+import com.leonardolelli.RentalService.exception.BookNotAvailableException;
+import com.leonardolelli.RentalService.exception.BookNotRentedException;
 import com.leonardolelli.RentalService.model.Rent;
 import com.leonardolelli.RentalService.model.User;
 import com.leonardolelli.RentalService.repository.RentRepository;
@@ -77,6 +80,18 @@ class RentServiceTest {
 	Mockito.when(rentRepository.findById(id)).thenReturn(Optional.of(r));
 	Rent res = rentService.findById(id);
 	assertEquals(res, r);
+    }
+
+    @Test
+    void testBookNotAvailableException() {
+	Mockito.when(restTemplate.getForObject(anyString(), eq(Boolean.class))).thenReturn(false);
+	assertThrows(BookNotAvailableException.class, () -> rentService.rentABook(new Rent()));
+    }
+
+    @Test
+    void testBookNotRentedException() {
+	Mockito.when(rentRepository.findFirstByIsbnAndReturnDateIsNull(anyString())).thenReturn(Optional.empty());
+	assertThrows(BookNotRentedException.class, () -> rentService.returnABook(""));
     }
 
 }

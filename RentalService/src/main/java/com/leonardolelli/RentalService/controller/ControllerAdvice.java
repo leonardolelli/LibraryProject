@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.leonardolelli.RentalService.exception.BookAlreadyReturnedException;
+import com.leonardolelli.RentalService.exception.BookNotRentedException;
 import com.leonardolelli.RentalService.exception.BookNotAvailableException;
 
 @RestControllerAdvice
@@ -30,9 +30,9 @@ public class ControllerAdvice {
     void SQLHandle(SQLException exc) {
     }
 
-    @ExceptionHandler(BookAlreadyReturnedException.class)
+    @ExceptionHandler(BookNotRentedException.class)
     @ResponseStatus(value = HttpStatus.CONFLICT, reason = "The book was already returned")
-    void GenreNotValidHandle(BookAlreadyReturnedException exc) {
+    void GenreNotValidHandle(BookNotRentedException exc) {
     }
 
     @ExceptionHandler(BookNotAvailableException.class)
