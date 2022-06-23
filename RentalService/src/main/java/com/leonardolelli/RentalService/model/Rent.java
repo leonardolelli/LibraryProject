@@ -11,8 +11,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @Entity
 @Table(name = "rents")
 public class Rent {
@@ -24,15 +27,12 @@ public class Rent {
     @Column(name = "isbn")
     private String isbn;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @Column(name = "from_date")
     private LocalDate fromDate;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @Column(name = "to_date")
     private LocalDate toDate;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
     @Column(name = "return_date")
     private LocalDate returnDate;
 
@@ -52,60 +52,6 @@ public class Rent {
 	this.user = user;
 	this.fromDate = LocalDate.now();
 	this.returnDate = null;
-    }
-
-    public Integer getId() {
-	return id;
-    }
-
-    public void setId(Integer id) {
-	this.id = id;
-    }
-
-    public String getIsbn() {
-	return isbn;
-    }
-
-    public void setIsbn(String isbn) {
-	this.isbn = isbn;
-    }
-
-    public LocalDate getFromDate() {
-	return fromDate;
-    }
-
-    public void setFromDate(LocalDate fromDate) {
-	this.fromDate = fromDate;
-    }
-
-    public LocalDate getToDate() {
-	return toDate;
-    }
-
-    public void setToDate(LocalDate toDate) {
-	this.toDate = toDate;
-    }
-
-    public LocalDate getReturnDate() {
-	return returnDate;
-    }
-
-    public void setReturnDate(LocalDate returnDate) {
-	this.returnDate = returnDate;
-    }
-
-    public User getUser() {
-	return user;
-    }
-
-    public void setUser(User user) {
-	this.user = user;
-    }
-
-    @Override
-    public String toString() {
-	return String.format("%s %s", this.isbn, this.returnDate.toString());
-
     }
 
 }

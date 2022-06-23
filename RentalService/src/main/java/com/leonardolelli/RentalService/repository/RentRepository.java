@@ -17,4 +17,8 @@ public interface RentRepository extends JpaRepository<Rent, Integer> {
 
     @Query("select r from Rent r where r.user.username = ?1 and r.returnDate is not null")
     List<Rent> findByUserAndReturnDateIsNotNull(String username);
+
+    @Query("select case " + "when count(r)>0 " + "then true " + "else false end " + "from Rent r "
+	    + "where r.isbn=?1 and r.user.username=?2 and r.returnDate is not null")
+    boolean existsByIsbnAndUserAndReturnDateIsNotNull(String isbn, String username);
 }

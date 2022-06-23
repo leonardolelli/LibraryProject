@@ -78,7 +78,7 @@ class RentServiceTest {
 	Rent r = new Rent(id, "isbn1", LocalDate.of(2020, Month.JULY, 1),
 		new User("user", "luigi", "rossi", LocalDate.of(2000, Month.JULY, 1)));
 	Mockito.when(rentRepository.findById(id)).thenReturn(Optional.of(r));
-	Rent res = rentService.findById(id);
+	Rent res = rentService.find(id);
 	assertEquals(res, r);
     }
 

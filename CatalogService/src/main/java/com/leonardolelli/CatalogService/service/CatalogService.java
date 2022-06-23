@@ -14,38 +14,38 @@ import com.leonardolelli.CatalogService.repository.CatalogRepository;
 @Service
 public class CatalogService {
 
-	@Autowired
-	CatalogRepository catalogRepository;
+    @Autowired
+    CatalogRepository catalogRepository;
 
-	public List<Book> findAll() {
-		return catalogRepository.findAll();
-	}
+    public List<Book> findAll() {
+	return catalogRepository.findAll();
+    }
 
-	public Book findById(String isbn) {
-		return catalogRepository.findById(isbn).orElseThrow();
-	}
+    public Book find(String isbn) {
+	return catalogRepository.findById(isbn).orElseThrow();
+    }
 
-	public List<Book> findAllBy(Genre genre, String author) {
-		List<Book> ret = new ArrayList<>();
+    public List<Book> findAllBy(Genre genre, String author) {
+	List<Book> ret = new ArrayList<>();
 
-		if (genre == null && isNullOrBlank(author))
-			throw new NoParametersException();
+	if (genre == null && isNullOrBlank(author))
+	    throw new NoParametersException();
 
-		else if (!(genre == null)) {
-			ret = isNullOrBlank(author) ? catalogRepository.findAllByGenre(genre)
-					: catalogRepository.findAllByGenreAndAuthor(genre, author);
-		} else if (!isNullOrBlank(author))
-			ret = catalogRepository.findAllByAuthor(author);
+	else if (!(genre == null)) {
+	    ret = isNullOrBlank(author) ? catalogRepository.findByGenre(genre)
+		    : catalogRepository.findByGenreAndAuthor(genre, author);
+	} else if (!isNullOrBlank(author))
+	    ret = catalogRepository.findByAuthor(author);
 
-		return ret;
-	}
+	return ret;
+    }
 
-	public Boolean isInLibrary(String isbn) {
-		return catalogRepository.findById(isbn).isPresent();
-	}
+    public Boolean isInLibrary(String isbn) {
+	return catalogRepository.findById(isbn).isPresent();
+    }
 
-	private boolean isNullOrBlank(String testo) {
-		return testo == null || testo.isBlank();
-	}
+    private boolean isNullOrBlank(String testo) {
+	return testo == null || testo.isBlank();
+    }
 
 }

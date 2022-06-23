@@ -8,8 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import com.leonardolelli.RentalService.exception.BookNotRentedException;
 import com.leonardolelli.RentalService.exception.BookNotAvailableException;
+import com.leonardolelli.RentalService.exception.BookNotRentedException;
 import com.leonardolelli.RentalService.model.Rent;
 import com.leonardolelli.RentalService.repository.RentRepository;
 
@@ -45,7 +45,7 @@ public class RentService {
 	return rentRepository.save(res);
     }
 
-    public Rent findById(Integer id) {
+    public Rent find(Integer id) {
 	return rentRepository.findById(id).orElseThrow();
     }
 
@@ -55,5 +55,9 @@ public class RentService {
 
     public List<Rent> findAllCompletedRentsFor(String username) {
 	return rentRepository.findByUserAndReturnDateIsNotNull(username);
+    }
+
+    public boolean hasReturnedTheBoom(String isbn, String username) {
+	return rentRepository.existsByIsbnAndUserAndReturnDateIsNotNull(isbn, username);
     }
 }

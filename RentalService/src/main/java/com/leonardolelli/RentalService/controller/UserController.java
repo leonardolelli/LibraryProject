@@ -19,7 +19,7 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/index")
-    public List<User> getUsers() {
+    public List<User> list() {
 	return userService.findAll();
     }
 

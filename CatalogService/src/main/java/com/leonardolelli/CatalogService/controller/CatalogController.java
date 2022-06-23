@@ -20,38 +20,38 @@ import com.leonardolelli.CatalogService.service.CatalogService;
 @CrossOrigin
 public class CatalogController {
 
-	@Autowired
-	CatalogService catalogService;
+    @Autowired
+    CatalogService catalogService;
 
-	@GetMapping("/index")
-	public List<Book> getBooks() {
-		return catalogService.findAll();
+    @GetMapping("/index")
+    public List<Book> getBooks() {
+	return catalogService.findAll();
+    }
+
+    @GetMapping("/{isbn}")
+    public Book details(@PathVariable(name = "isbn", required = true) String isbn) {
+	return catalogService.find(isbn);
+    }
+
+    @GetMapping("/isInLibrary/{isbn}")
+    public Boolean isInLibrary(@PathVariable(name = "isbn", required = true) String isbn) {
+	return catalogService.isInLibrary(isbn);
+    }
+
+    @GetMapping("/findAllBy")
+    public List<Book> findAllBy(@RequestParam(name = "genre", required = false) String genre,
+	    @RequestParam(name = "author", required = false) String author) {
+
+	if (genre == null)
+	    return catalogService.findAllBy(null, author);
+
+	try {
+	    Genre g = Genre.valueOf(genre);
+	    return catalogService.findAllBy(g, author);
+	} catch (IllegalArgumentException e) {
+	    throw new GenreNotValidException();
 	}
 
-	@GetMapping("/{isbn}")
-	public Book details(@PathVariable(name = "isbn", required = true) String isbn) {
-		return catalogService.findById(isbn);
-	}
-
-	@GetMapping("/isInLibrary/{isbn}")
-	public Boolean isInLibrary(@PathVariable(name = "isbn", required = true) String isbn) {
-		return catalogService.isInLibrary(isbn);
-	}
-
-	@GetMapping("/findAllBy")
-	public List<Book> findAllBy(@RequestParam(name = "genre", required = false) String genre,
-			@RequestParam(name = "author", required = false) String author) {
-
-		if (genre == null)
-			return catalogService.findAllBy(null, author);
-
-		try {
-			Genre g = Genre.valueOf(genre);
-			return catalogService.findAllBy(g, author);
-		} catch (IllegalArgumentException e) {
-			throw new GenreNotValidException();
-		}
-
-	}
+    }
 
 }

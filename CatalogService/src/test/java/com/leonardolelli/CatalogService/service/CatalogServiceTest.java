@@ -43,7 +43,7 @@ class CatalogServiceTest {
 	Book testBook = new Book(id1, "titolo1", "autore1", 1990, Genre.horror);
 
 	Mockito.when(catalogRepository.findById(id1)).thenReturn(Optional.of(testBook));
-	Book result = catalogService.findById(id1);
+	Book result = catalogService.find(id1);
 	assertEquals(result, testBook);
     }
 
@@ -54,7 +54,7 @@ class CatalogServiceTest {
 	List<Book> bookList = List.of(new Book(id1, "titolo1", "autore1", 1990, Genre.horror),
 		new Book(id2, "titolo2", "autore2", 2000, Genre.horror));
 
-	Mockito.when(catalogRepository.findAllByGenre(Genre.horror)).thenReturn(bookList);
+	Mockito.when(catalogRepository.findByGenre(Genre.horror)).thenReturn(bookList);
 	List<Book> result = catalogService.findAllBy(Genre.horror, null);
 	assertEquals(result, bookList);
     }
@@ -66,7 +66,7 @@ class CatalogServiceTest {
 	List<Book> bookList = List.of(new Book(id1, "titolo1", "autore2", 1990, Genre.horror),
 		new Book(id2, "titolo2", "autore2", 2000, Genre.horror));
 
-	Mockito.when(catalogRepository.findAllByAuthor("autore2")).thenReturn(bookList);
+	Mockito.when(catalogRepository.findByAuthor("autore2")).thenReturn(bookList);
 	List<Book> result = catalogService.findAllBy(null, "autore2");
 	assertEquals(result, bookList);
     }
@@ -78,7 +78,7 @@ class CatalogServiceTest {
 	List<Book> bookList = List.of(new Book(id1, "titolo1", "autore2", 1990, Genre.horror),
 		new Book(id2, "titolo2", "autore2", 2000, Genre.horror));
 
-	Mockito.when(catalogRepository.findAllByGenreAndAuthor(Genre.horror, "autore2")).thenReturn(bookList);
+	Mockito.when(catalogRepository.findByGenreAndAuthor(Genre.horror, "autore2")).thenReturn(bookList);
 	List<Book> result = catalogService.findAllBy(Genre.horror, "autore2");
 	assertEquals(result, bookList);
     }
