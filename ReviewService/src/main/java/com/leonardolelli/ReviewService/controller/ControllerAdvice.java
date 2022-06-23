@@ -1,4 +1,4 @@
-package com.leonardolelli.RentalService.controller;
+package com.leonardolelli.ReviewService.controller;
 
 import java.sql.SQLException;
 import java.sql.SQLTransientConnectionException;
@@ -9,8 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.leonardolelli.RentalService.exception.BookNotAvailableException;
-import com.leonardolelli.RentalService.exception.BookNotRentedException;
+import com.leonardolelli.ReviewService.exception.BookNotReturnedByUserException;
 
 @RestControllerAdvice
 public class ControllerAdvice {
@@ -30,13 +29,9 @@ public class ControllerAdvice {
     void SQLHandle(SQLException exc) {
     }
 
-    @ExceptionHandler(BookNotRentedException.class)
-    @ResponseStatus(value = HttpStatus.CONFLICT, reason = "The book was already returned")
-    void BookNotRentedExceptionHandle(BookNotRentedException exc) {
+    @ExceptionHandler(BookNotReturnedByUserException.class)
+    @ResponseStatus(value = HttpStatus.CONFLICT, reason = "The book was not returned by this user")
+    void BookNotReturnedByUserExceptionHandle(BookNotReturnedByUserException exc) {
     }
 
-    @ExceptionHandler(BookNotAvailableException.class)
-    @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Book not available")
-    void BookNotAvailableExceptionHandle(BookNotAvailableException exc) {
-    }
 }

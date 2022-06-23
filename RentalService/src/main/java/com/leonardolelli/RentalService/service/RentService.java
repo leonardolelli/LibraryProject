@@ -31,8 +31,10 @@ public class RentService {
     }
 
     public boolean isAvailable(String isbn) {
-	return restTemplate.getForObject(String.format("%s%s/%s", CATALOG_SERVICE_URL, IS_IN_LIBRARY, isbn),
-		Boolean.class) && rentRepository.findFirstByIsbnAndReturnDateIsNull(isbn).isEmpty();
+	return restTemplate.getForObject(
+		String.format("%s%s/%s", CATALOG_SERVICE_URL, IS_IN_LIBRARY, isbn),
+		Boolean.class)
+		&& rentRepository.findFirstByIsbnAndReturnDateIsNull(isbn).isEmpty();
 
     }
 
@@ -57,7 +59,7 @@ public class RentService {
 	return rentRepository.findByUserAndReturnDateIsNotNull(username);
     }
 
-    public boolean hasReturnedTheBoom(String isbn, String username) {
+    public boolean hasReturnedTheBook(String isbn, String username) {
 	return rentRepository.existsByIsbnAndUserAndReturnDateIsNotNull(isbn, username);
     }
 }
