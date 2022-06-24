@@ -34,7 +34,7 @@ public class RentService {
 	return restTemplate.getForObject(
 		String.format("%s%s/%s", CATALOG_SERVICE_URL, IS_IN_LIBRARY, isbn),
 		Boolean.class)
-		&& rentRepository.findFirstByIsbnAndReturnDateIsNull(isbn).isEmpty();
+		&& !rentRepository.existsByIsbnAndReturnDateIsNull(isbn);
 
     }
 
