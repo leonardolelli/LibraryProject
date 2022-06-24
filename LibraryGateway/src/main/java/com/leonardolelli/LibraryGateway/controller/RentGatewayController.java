@@ -1,4 +1,4 @@
-package com.leonardolelli.RentalService.controller;
+package com.leonardolelli.LibraryGateway.controller;
 
 import java.util.List;
 
@@ -13,52 +13,45 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.leonardolelli.RentalService.model.Rent;
-import com.leonardolelli.RentalService.service.RentService;
+import com.leonardolelli.LibraryGateway.model.Rent;
+import com.leonardolelli.LibraryGateway.service.RentGatewayService;
 
 @RestController
 @RequestMapping("/api/rent")
 @CrossOrigin
-public class RentController {
+public class RentGatewayController {
 
     @Autowired
-    private RentService rentService;
+    private RentGatewayService rentGatewayService;
 
     @GetMapping("/isAvailable")
     public boolean isAvailable(@RequestParam(name = "isbn", required = true) String isbn) {
-	return rentService.isAvailable(isbn);
+	return rentGatewayService.isAvailable(isbn);
     }
 
     @GetMapping("/{id}")
     public Rent details(@PathVariable(name = "id", required = true) Integer id) {
-	return rentService.find(id);
+	return rentGatewayService.find(id);
     }
 
     @PostMapping
     public Rent rentABook(@RequestBody Rent rent) {
-	return rentService.rentABook(rent);
+	return rentGatewayService.rentABook(rent);
     }
 
     @PatchMapping("/{isbn}")
-    public Rent returnABook(@RequestBody(required = false) Rent rent,
-	    @PathVariable(name = "isbn", required = true) String isbn) {
-	return rentService.returnABook(isbn);
+    public Rent returnABook(@PathVariable(name = "isbn", required = true) String isbn) {
+	return rentGatewayService.returnABook(isbn);
     }
 
     @GetMapping("/pending_rents/{username}")
     public List<Rent> getPendingRentsForUser(@PathVariable(name = "username", required = true) String username) {
-	return rentService.findAllPendingRentsFor(username);
+	return rentGatewayService.findAllPendingRentsFor(username);
     }
 
     @GetMapping("/completed_rents/{username}")
     public List<Rent> getCompletedRentsForUser(@PathVariable(name = "username", required = true) String username) {
-	return rentService.findAllCompletedRentsFor(username);
-    }
-
-    @GetMapping("/has_returned/{isbn}")
-    public boolean hasReturnedTheBook(@PathVariable(name = "isbn", required = true) String isbn,
-	    @RequestParam(name = "username", required = true) String username) {
-	return rentService.hasReturnedTheBook(isbn, username);
+	return rentGatewayService.findAllCompletedRentsFor(username);
     }
 
 }

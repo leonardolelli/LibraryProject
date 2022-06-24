@@ -1,4 +1,4 @@
-package com.leonardolelli.ReviewService.controller;
+package com.leonardolelli.LibraryGateway.controller;
 
 import java.util.List;
 
@@ -13,40 +13,40 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.leonardolelli.ReviewService.model.Review;
-import com.leonardolelli.ReviewService.service.ReviewService;
+import com.leonardolelli.LibraryGateway.model.Review;
+import com.leonardolelli.LibraryGateway.service.ReviewGatewayService;
 
 @RestController
 @RequestMapping("/api/review")
 @CrossOrigin
-public class ReviewController {
+public class ReviewGatewayController {
 
     @Autowired
-    private ReviewService reviewService;
+    private ReviewGatewayService reviewGatewayService;
 
     @GetMapping("/{id}")
     public Review details(@PathVariable(name = "id", required = true) String id) {
-	return reviewService.find(id);
+	return reviewGatewayService.find(id);
     }
 
     @GetMapping("/book/{isbn}")
     public List<Review> listReviewsFor(@PathVariable(name = "isbn", required = true) String isbn) {
-	return reviewService.getReviewsFor(isbn);
+	return reviewGatewayService.getReviewsFor(isbn);
     }
 
     @PostMapping
     public Review post(@RequestBody Review r) {
-	return reviewService.insert(r);
+	return reviewGatewayService.insert(r);
     }
 
     @PutMapping
     public Review modify(@RequestBody Review r) {
-	return reviewService.update(r);
+	return reviewGatewayService.update(r);
     }
 
     @DeleteMapping("/{id}")
     public void delete(@PathVariable(name = "id", required = true) String id) {
-	reviewService.delete(id);
+	reviewGatewayService.delete(id);
     }
 
 }
