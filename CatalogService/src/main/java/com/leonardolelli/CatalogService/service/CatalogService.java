@@ -45,7 +45,7 @@ public class CatalogService {
     }
 
     private boolean isNullOrBlank(String testo) {
-	return testo == null || testo.isBlank();
+	return testo == null || testo.isBlank() || testo.equals("null");
     }
 
 }

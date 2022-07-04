@@ -10,6 +10,7 @@ import org.springframework.web.client.RestTemplate;
 
 import com.leonardolelli.RentalService.exception.BookNotAvailableException;
 import com.leonardolelli.RentalService.exception.BookNotRentedException;
+import com.leonardolelli.RentalService.exception.InvalidDateException;
 import com.leonardolelli.RentalService.model.Rent;
 import com.leonardolelli.RentalService.repository.RentRepository;
 
@@ -21,12 +22,14 @@ public class RentService {
     @Autowired
     private RestTemplate restTemplate;
 
-    public static final String CATALOG_SERVICE_URL = "http://localhost:8083";
+    public static final String CATALOG_SERVICE_URL = "http://host.docker.internal:8083";
     public static final String IS_IN_LIBRARY = "/api/catalog/isInLibrary";
 
     public Rent rentABook(Rent rent) {
 	if (!isAvailable(rent.getIsbn()))
 	    throw new BookNotAvailableException();
+	if (!rent.getToDate().isAfter(LocalDate.now()))
+	    throw new InvalidDateException();
 	return rentRepository.save(rent);
     }
 
@@ -62,4 +65,13 @@ public class RentService {
     public boolean hasReturnedTheBook(String isbn, String username) {
 	return rentRepository.existsByIsbnAndUserAndReturnDateIsNotNull(isbn, username);
     }
+
+    public LocalDate getExpectedReturnDate(String isbn) {
+	return rentRepository.findFirstByIsbnAndReturnDateIsNotNull(isbn).orElseThrow().getToDate();
+    }
+
+    public Rent findByIsbnNotReturnedYet(String isbn) {
+	return rentRepository.findFirstByIsbnAndReturnDateIsNull(isbn).orElseThrow();
+    }
+
 }

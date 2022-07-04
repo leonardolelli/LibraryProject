@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import com.leonardolelli.RentalService.exception.BookNotAvailableException;
 import com.leonardolelli.RentalService.exception.BookNotRentedException;
+import com.leonardolelli.RentalService.exception.InvalidDateException;
 
 @RestControllerAdvice
 public class ControllerAdvice {
@@ -38,5 +39,10 @@ public class ControllerAdvice {
     @ExceptionHandler(BookNotAvailableException.class)
     @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Book not available")
     void BookNotAvailableExceptionHandle(BookNotAvailableException exc) {
+    }
+
+    @ExceptionHandler(InvalidDateException.class)
+    @ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "Excpected return date not valid")
+    void InvalidDateExceptionHandle(InvalidDateException exc) {
     }
 }

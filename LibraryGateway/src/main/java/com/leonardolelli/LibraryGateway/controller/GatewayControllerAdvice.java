@@ -10,6 +10,8 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.ResourceAccessException;
 
+import com.leonardolelli.LibraryGateway.exception.InvalidOperationException;
+
 @ControllerAdvice
 public class GatewayControllerAdvice {
 
@@ -35,7 +37,12 @@ public class GatewayControllerAdvice {
 
     @ExceptionHandler(HttpClientErrorException.Conflict.class)
     @ResponseStatus(value = HttpStatus.CONFLICT)
-    void serviceUnavaliableHandle(HttpClientErrorException.Conflict exc) {
+    void conflictHandle(HttpClientErrorException.Conflict exc) {
+    }
+
+    @ExceptionHandler(InvalidOperationException.class)
+    @ResponseStatus(value = HttpStatus.NOT_ACCEPTABLE)
+    void invalidOperationHandle(InvalidOperationException exc) {
     }
 
     @ExceptionHandler(ResourceAccessException.class)

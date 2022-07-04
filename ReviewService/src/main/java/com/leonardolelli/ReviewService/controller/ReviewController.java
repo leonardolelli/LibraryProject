@@ -34,6 +34,11 @@ public class ReviewController {
 	return reviewService.getReviewsFor(isbn);
     }
 
+    @GetMapping("/user/{username}")
+    public List<Review> listReviewsOf(@PathVariable(name = "username", required = true) String username) {
+	return reviewService.getReviewsOf(username);
+    }
+
     @PostMapping
     public Review post(@RequestBody Review r) {
 	return reviewService.insert(r);

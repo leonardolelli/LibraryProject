@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.leonardolelli.LibraryGateway.model.Book;
-import com.leonardolelli.LibraryGateway.model.Book.Genre;
 import com.leonardolelli.LibraryGateway.service.CatalogGatewayService;
 
 @RestController
@@ -33,7 +32,7 @@ public class CatalogGatewayController {
     }
 
     @GetMapping("/findAllBy")
-    public List<Book> findAllBy(@RequestParam(name = "genre", required = false) Genre genre,
+    public List<Book> findAllBy(@RequestParam(name = "genre", required = false) String genre,
 	    @RequestParam(name = "author", required = false) String author) {
 	return catalogGatewayService.findAllBy(genre, author);
 
