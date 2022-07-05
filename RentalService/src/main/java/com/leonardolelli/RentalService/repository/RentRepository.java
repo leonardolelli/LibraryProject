@@ -12,6 +12,10 @@ public interface RentRepository extends JpaRepository<Rent, Integer> {
 
     Optional<Rent> findFirstByIsbnAndReturnDateIsNull(String isbn);
 
+    Optional<Rent> findFirstByIsbnAndReturnDateIsNotNull(String isbn);
+
+    boolean existsByIsbnAndReturnDateIsNull(String isbn);
+
     @Query("select r from Rent r where r.user.username = ?1 and r.returnDate is null")
     List<Rent> findByUserAndReturnDateIsNull(String username);
 

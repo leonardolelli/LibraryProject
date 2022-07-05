@@ -39,11 +39,12 @@ class RentServiceTest {
     void testRentABook() {
 	Integer id = 1;
 	String isbn = "isbn1";
-	Rent r = new Rent(id, isbn, LocalDate.of(2020, Month.JULY, 1),
-		new User("user", "luigi", "rossi", LocalDate.of(2000, Month.JULY, 1)));
-	Mockito.when(rentRepository.findFirstByIsbnAndReturnDateIsNull(isbn)).thenReturn(Optional.empty());
+	Rent r = new Rent(id, isbn, LocalDate.of(2023, Month.JULY, 1), new User("user",
+		"luigi", "rossi", LocalDate.of(2023, Month.JULY, 1)));
+	// Mockito.when(rentRepository.findFirstByIsbnAndReturnDateIsNull(isbn)).thenReturn(Optional.empty());
 	Mockito.when(rentRepository.save(r)).thenReturn(r);
-	Mockito.when(restTemplate.getForObject(anyString(), eq(Boolean.class))).thenReturn(true);
+	Mockito.when(restTemplate.getForObject(anyString(),
+		eq(Boolean.class))).thenReturn(true);
 	Rent res = rentService.rentABook(r);
 	assertEquals(r, res);
     }
@@ -52,11 +53,11 @@ class RentServiceTest {
     void testIsAvailable() {
 	Integer id = 1;
 	String isbn = "isbn1";
-	Rent r = new Rent(id, isbn, LocalDate.of(2020, Month.JULY, 1),
+	Rent r = new Rent(id, isbn, LocalDate.of(2023, Month.JULY, 1),
 		new User("user", "luigi", "rossi", LocalDate.of(2000, Month.JULY, 1)));
 	r.setReturnDate(LocalDate.now());
-	Mockito.when(rentRepository.findFirstByIsbnAndReturnDateIsNull(isbn)).thenReturn(Optional.of(r));
-	Mockito.when(restTemplate.getForObject(anyString(), eq(Boolean.class))).thenReturn(true);
+	// Mockito.when(rentRepository.findFirstByIsbnAndReturnDateIsNull(isbn)).thenReturn(Optional.of(r));
+	Mockito.when(restTemplate.getForObject(anyString(), eq(Boolean.class))).thenReturn(false);
 	assertFalse(rentService.isAvailable(isbn));
     }
 
@@ -64,8 +65,8 @@ class RentServiceTest {
     void testReturnABook() {
 	Integer id = 1;
 	String isbn = "isbn1";
-	Rent r = new Rent(id, isbn, LocalDate.of(2020, Month.JULY, 1),
-		new User("user", "luigi", "rossi", LocalDate.of(2000, Month.JULY, 1)));
+	Rent r = new Rent(id, isbn, LocalDate.of(2023, Month.JULY, 1),
+		new User("user", "luigi", "rossi", LocalDate.of(2023, Month.JULY, 1)));
 	Mockito.when(rentRepository.findFirstByIsbnAndReturnDateIsNull(isbn)).thenReturn(Optional.of(r));
 	Mockito.when(rentRepository.save(r)).thenReturn(r);
 	Rent res = rentService.returnABook(isbn);
@@ -75,7 +76,7 @@ class RentServiceTest {
     @Test
     void testFindById() {
 	Integer id = 1;
-	Rent r = new Rent(id, "isbn1", LocalDate.of(2020, Month.JULY, 1),
+	Rent r = new Rent(id, "isbn1", LocalDate.of(2023, Month.JULY, 1),
 		new User("user", "luigi", "rossi", LocalDate.of(2000, Month.JULY, 1)));
 	Mockito.when(rentRepository.findById(id)).thenReturn(Optional.of(r));
 	Rent res = rentService.find(id);

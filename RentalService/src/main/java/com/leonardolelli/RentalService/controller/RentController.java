@@ -1,5 +1,6 @@
 package com.leonardolelli.RentalService.controller;
 
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,11 @@ public class RentController {
 	return rentService.find(id);
     }
 
+    @GetMapping("/isbn/{isbn}")
+    public Rent findByIsbnNotReturnedYet(@PathVariable(name = "isbn", required = true) String isbn) {
+	return rentService.findByIsbnNotReturnedYet(isbn);
+    }
+
     @PostMapping
     public Rent rentABook(@RequestBody Rent rent) {
 	return rentService.rentABook(rent);
@@ -59,6 +65,11 @@ public class RentController {
     public boolean hasReturnedTheBook(@PathVariable(name = "isbn", required = true) String isbn,
 	    @RequestParam(name = "username", required = true) String username) {
 	return rentService.hasReturnedTheBook(isbn, username);
+    }
+
+    @GetMapping("/expected_return_date/{isbn}")
+    public LocalDate getExpectedReturnDate(@PathVariable(name = "isbn", required = true) String isbn) {
+	return rentService.getExpectedReturnDate(isbn);
     }
 
 }

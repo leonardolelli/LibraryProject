@@ -1,0 +1,12 @@
+<nav>
+    <ul>
+        <li><a routerLink="/home">Home</a></li>
+        <li><a routerLink="/catalog">Catalog</a></li>
+        <!--<li><a routerLink="/renting">Rent a book</a></li>-->
+        <li><a (click)="userRents()">Your rents</a></li>
+        <li><a (click)="userReviews()">Your reviews</a></li>
+        <li><a *ngIf="!isLoggedIn" routerLink="/login">Login</a></li>
+        <!--<li><a *ngIf="isLoggedIn">{{username}}</a></li>-->
+        <li><a *ngIf="isLoggedIn" (click)="logout()">Logout</a></li>
+    </ul>
+</nav>

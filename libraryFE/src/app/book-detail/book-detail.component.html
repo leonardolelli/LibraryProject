@@ -1,0 +1,12 @@
+<div class="page">
+    <h3>Details</h3>
+    <ul class="book" *ngIf="book">
+        <li><b>Isbn</b>: {{book.isbn}}</li>
+        <li><b>Title</b>: {{book.title}}</li>
+        <li><b>Author</b>: {{book.author}}</li>
+        <li><b>Year</b>: {{book.year}}</li>
+        <li><b>Genre</b>: {{book.genre}}</li>
+        <li><b>Status</b>: {{status ? 'Available' : 'Not Available'}}</li>
+    </ul>
+    <app-review *ngIf="!amIinRent"></app-review>
+</div>

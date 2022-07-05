@@ -1,0 +1,15 @@
+<p>You are about to rent the following book:</p>
+<app-book-detail></app-book-detail>
+
+<div *ngIf="isAvailable" class="page">
+    <label for="to_date">Select the expected return date</label>
+    <input id="to_date" type="date" min="{{today}}" 
+    (change)="getDate($event)" 
+    [formControl]="toDateForm"/>
+    <button (click)="rentBook()">Rent</button>
+</div>
+
+<div *ngIf="!isAvailable" class="page">
+    Sorry this book is not available now, 
+    we expect to have it back on {{returnDate | date:'medium' }}
+</div>

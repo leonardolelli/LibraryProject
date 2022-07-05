@@ -41,7 +41,6 @@ public class CatalogController {
     @GetMapping("/findAllBy")
     public List<Book> findAllBy(@RequestParam(name = "genre", required = false) String genre,
 	    @RequestParam(name = "author", required = false) String author) {
-
 	if (genre == null)
 	    return catalogService.findAllBy(null, author);
 

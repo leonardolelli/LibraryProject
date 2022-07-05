@@ -1,0 +1,9 @@
+<h3>Reviews</h3>
+<div *ngFor="let r of reviews">
+    <div class="review">
+        <div class = "heading">{{r.username}}</div>
+        <div>Score: {{r.score}}/5</div>
+        <div> Last update: {{r.lastUpdate | date: 'medium' }} </div>
+        <div class = "content">{{r.text}}</div>
+    </div>
+</div>

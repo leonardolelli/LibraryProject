@@ -20,7 +20,7 @@ public class ReviewService {
     @Autowired
     private RestTemplate restTemplate;
 
-    public static final String RENT_SERVICE_URL = "http://localhost:8084";
+    public static final String RENT_SERVICE_URL = "http://host.docker.internal:8084";
     public static final String HAS_RETURNED = "/api/rent/has_returned";
 
     public List<Review> getReviewsFor(String isbn) {
@@ -52,6 +52,10 @@ public class ReviewService {
 
     public Review find(String id) {
 	return reviewRepository.findById(id).orElseThrow();
+    }
+
+    public List<Review> getReviewsOf(String username) {
+	return reviewRepository.findByUsername(username);
     }
 
 }

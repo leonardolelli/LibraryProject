@@ -1,0 +1,13 @@
+.review{
+    margin-bottom: 20px;
+    margin-left: 25px;
+    border-bottom: solid;
+    border-color: black;
+    width: 40%;
+}
+
+.content{
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-style: italic;
+}

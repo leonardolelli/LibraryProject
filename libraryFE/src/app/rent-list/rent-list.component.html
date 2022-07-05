@@ -1,0 +1,23 @@
+<div class="page">
+    <h3>Pending Rents</h3>
+    <div *ngFor="let r of pendingRents">
+        <div class="rent">
+            <div>isbn: {{r.isbn}}</div>
+            <div>from: {{r.fromDate | date: 'medium' }}</div>
+            <div>to: {{r.toDate | date: 'medium' }}</div>
+            <div><button class="button" (click)="returnBook(r.isbn)">Return</button></div>
+        </div>
+    </div>
+
+
+    <h3>Completed Rents</h3>
+    <div *ngFor="let r of completedRents">
+        <div class="rent">
+            <div>isbn: {{r.isbn}}</div>
+            <!--<div>{{getBook(r.isbn)}}</div>-->
+            <div>from: {{r.fromDate | date: 'medium' }}</div>
+            <div>to: {{r.returnDate | date: 'medium' }}</div>
+            <a class="a-button" routerLink="/add_review/{{r.isbn}}">Add Review</a>
+        </div>
+    </div>
+</div>

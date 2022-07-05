@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.leonardolelli.LibraryGateway.model.Book;
-import com.leonardolelli.LibraryGateway.model.Book.Genre;
 
 @Service
 public class CatalogGatewayService {
@@ -16,7 +15,7 @@ public class CatalogGatewayService {
     @Autowired
     private RestTemplate restTemplate;
 
-    public static final String CATALOG_SERVICE_URL = "http://localhost:8083/api/catalog";
+    public static final String CATALOG_SERVICE_URL = "http://host.docker.internal:8083/api/catalog";
     public static final String INDEX = "/index";
     public static final String IS_IN_LIBRARY = "/isInLibrary";
     public static final String FIND_ALL_BY = "/findAllBy";
@@ -35,7 +34,7 @@ public class CatalogGatewayService {
 
     }
 
-    public List<Book> findAllBy(Genre genre, String author) {
+    public List<Book> findAllBy(String genre, String author) {
 	return Arrays
 		.asList(restTemplate.getForObject(
 			String.format("%s%s?genre=%s&author=%s", CATALOG_SERVICE_URL, FIND_ALL_BY, genre, author),

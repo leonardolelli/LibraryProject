@@ -1,0 +1,17 @@
+<div class="page">
+    <!-- <app-review [reviews]="reviews!"></app-review>-->
+    <h3>Your Reviews</h3>
+    <div *ngFor="let r of reviews">
+        <div class="review">
+            <div>Isbn: {{r.isbn}}</div>
+            <div>Score: {{r.score}}/5</div>
+            <div>Last update: {{r.lastUpdate | date: 'medium' }} </div>
+            <div class="content">{{r.text}}</div>
+            <nav>
+                <!--<button>Modify</button>-->
+                <button id="delete"
+                (click)="delete(r.id!)">Delete</button>
+            </nav>
+        </div>
+    </div>
+</div>
