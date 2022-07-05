@@ -1,0 +1,21 @@
+<div class="page" *ngIf="book">
+    Review for "<b>{{book.title}}</b>" by {{book.author}} ({{book.year}})
+    <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()">
+        <div class="selectdiv">
+            <select formControlName="score">
+                <option value="">Choose a score</option>
+                <option *ngFor="let s of scores">
+                    {{s}}
+                </option>
+            </select>
+        </div>
+
+        <div>
+            <textarea formControlName="text" placeholder="write a review..." formControlName="text" required></textarea>
+        </div>
+
+        <div>
+            <button type="submit"> Submit </button>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,53 @@
+/* You can add global styles to this file, and also import other style files */
+body{
+    font-family: 'Trebuchet MS', sans-serif;
+}
+
+button {
+    background-color: #fff;
+    border: 1px solid #d5d9d9;
+    border-radius: 8px;
+    box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+    box-sizing: border-box;
+    color: #0f1111;
+    cursor: pointer;
+    display: inline-block;
+    font-family: "Amazon Ember",sans-serif;
+    font-size: 13px;
+    line-height: 29px;
+    padding: 0 5px 0 6px;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    vertical-align: middle;
+    width: 80px;
+  }
+  
+  button:hover {
+    background-color: #fcff96;
+  }
+  
+  button:focus {
+    border-color: #000000;
+    box-shadow: rgba(213, 217, 217, .5) 0 2px 5px 0;
+    outline: 0;
+  }
+
+  .a-button {
+    background-color: rgb(192, 255, 195);  
+    border-radius: 5px;
+    color: rgb(0, 0, 0);
+    padding: .5em;
+    display: inline-block;
+    text-decoration: none;
+  }
+  
+  .a-button:focus,
+  .a-button:hover {
+    background-color: rgb(29, 119, 47);
+    color: White;
+  }
+  

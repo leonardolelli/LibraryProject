@@ -1,0 +1,20 @@
+.rent{
+    margin-bottom: 20px;
+    margin-left: 25px;
+    width: 40%;
+}
+
+.page{
+    margin-left:30px;
+}
+
+button {
+    margin-top: 10px;
+    width: 120px;
+}
+
+.a-button{
+    margin-top:10px;
+    border: 2px solid black;
+    
+}

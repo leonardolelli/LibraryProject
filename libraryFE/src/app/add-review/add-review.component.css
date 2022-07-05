@@ -1,0 +1,93 @@
+.page{
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+button {
+    margin-top: 10px;
+}
+
+textarea {
+    margin:auto;
+    text-align: center;
+    display: block;
+    background-color: #dddddd;
+    color: #666666;
+    margin-top: 15px;
+    padding: 1em;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    outline: none;
+    font-family: "Heebo", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.4;
+    width: 37%;
+    height: 150px;
+    transition: all 0.2s;
+  }
+  
+textarea:hover {
+    cursor: pointer;
+    background-color: #eeeeee;
+  }
+  
+textarea:focus {
+    cursor: text;
+    color: #333333;
+    background-color: white;
+    border-color: #333333;
+  }
+  
+
+  select::-ms-expand {
+    display: block  }
+    
+    .selectdiv:after {
+      content: '<>';
+      font: 17px "Consolas", monospace;
+      color: #333;
+      -webkit-transform: rotate(90deg);
+      -moz-transform: rotate(90deg);
+      -ms-transform: rotate(90deg);
+      transform: rotate(90deg);
+      right: 11px;
+      
+      top: 18px;
+      padding: 0 0 2px;
+      border-bottom: 1px solid #999;
+      
+      position: absolute;
+      pointer-events: none;
+    }
+    .selectdiv {
+        display: block;
+        position: relative;
+        float: center;
+        min-width: 100px;
+        margin: 15px 37% ;
+      }
+
+    .selectdiv select {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      display: block;
+      width: 100%;
+      max-width: 320px;
+      height: 50px;
+      float: right;
+      margin: 5px 0px;
+      padding: 0px 24px;
+      font-size: 16px;
+      line-height: 1.75;
+      color: #333;
+      background-color: #ffffff;
+      background-image: none;
+      border: 1px solid #cccccc;
+      -ms-word-break: normal;
+      word-break: normal;
+      margin-bottom: 18px;
+      
+    }
